@@ -1,0 +1,2 @@
+Math.random()
+Math.PI
