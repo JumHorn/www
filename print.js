@@ -8,3 +8,10 @@
 */
 
 console.log("%d,%f", 8, 8.1)
+
+// format with pading
+// prefix(integer width)
+let number = 3;
+let val = number.toString().padStart(3, '0');
+// suffix(float precision)
+val = number.toFixed(3)
