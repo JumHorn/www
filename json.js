@@ -1,6 +1,6 @@
 //
 
-text = `{
+let text = `{
   "browsers": {
     "firefox": {
       "name": "Firefox",
@@ -15,8 +15,8 @@ text = `{
       }
     }
   }
-}`
+}`;
 
-jobj = JSON.parse(text)
+jobj = JSON.parse(text);
 
-jobj = jobj["browsers"]
+jobj = jobj["browsers"];
