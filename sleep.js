@@ -35,4 +35,21 @@ function sleep1(time) {
 	sleep(time).then(doTask);
 }
 
-// 闭包(Closures)
+// callback
+function sleep2(time, callback, count = 1) {
+	function doTask() {
+		--count;
+		if (count >= 0) {
+			callback();
+			sleep(time).then(doTask);
+		}
+	}
+
+	function sleep(time) {
+		return new Promise((resolve) => setTimeout(resolve, time));
+	}
+
+	sleep(time).then(doTask);
+}
+
+// 能加一个闭包(Closures)版本吗
