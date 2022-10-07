@@ -1,0 +1,36 @@
+<html>
+<title>JumHorn</title>
+<!--<script type="text/javascript" src="*/*.js"></script> -->
+<script>
+	//call android function
+	function showToast(toast){
+		Android.showToast(toast);
+	}
+	function showAlert(msg){
+		Android.showAlert(msg);
+	}
+
+</script>
+
+<!--<link rel="stylesheet" href="*/*.css"> -->
+
+<style>
+h1{
+	text-align:center;
+	font-size:100;
+}
+
+button{
+	font-size:50px;
+	margin:30px;
+}
+</style>
+
+<body>
+	<h1>Hello Android</h1>
+	<button onclick='location.reload();'>reload page</button>
+	<button onClick="showToast('toast Android!')">toast</button>
+	<button onClick="showAlert('alert Android!')">alert</button>
+</body>
+
+</html>
