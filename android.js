@@ -1,4 +1,6 @@
 //call android function
+
+// 通知类
 function showToast(toast) {
 	Android.showToast(toast);
 }
