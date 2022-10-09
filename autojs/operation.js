@@ -1,3 +1,4 @@
+// 操作代码
 
 function findAndClick(str) {
 	//寻找str按钮并点击
@@ -13,37 +14,17 @@ function findAndClick(str) {
 	}
 }
 
-function swipeUp() {
-	swipe(200, 900, 300, 180, 800);
-}
-
-function swipeDown() {
-	swipe(300, 180, 200, 900, 800);
-}
-
-function readPage(count) {
-	for (let i = 0; i < count; ++i) {
-		slidingByCurve();
-		sleep(1500);
-		// if (i % 5 == 0) {
-		// 	click(200, 500);
-		// }
-	}
-}
-
 /**
- * 从下往上滑动，直线滑动
+ * 从上往下滑动，曲线滑动
  */
-function slidingByLine() {
+function slidingDownByLine() {
 	// top X,Y范围
-	tx = randomPointLoc(500, 600);
-	ty = randomPointLoc(300, 400);
+	bx = randomPointLoc(500, 600);
+	by = randomPointLoc(300, 400);
 	// bottom X，Y 范围
-	bx = randomPointLoc(400, 700);
-	by = randomPointLoc(700, 1200);
+	tx = randomPointLoc(400, 700);
+	ty = randomPointLoc(700, 1200);
 
-	log("sliding (" + bx + "," + by + "), (" + tx + "," + ty + ")")
-	log("X: " + Math.abs(bx - tx) + " Y: " + Math.abs(by - ty));
 	slidingTime = randomRangeTime(0.8, 1.3);
 	swipe(bx, by, tx, ty, slidingTime);
 }
@@ -51,7 +32,7 @@ function slidingByLine() {
 /**
  * 从下往上滑动，曲线滑动
  */
-function slidingByCurve() {
+function slidingUpByCurve() {
 	// top X,Y范围
 	tx = randomPointLoc(500, 600);
 	ty = randomPointLoc(300, 400);
@@ -59,41 +40,21 @@ function slidingByCurve() {
 	bx = randomPointLoc(400, 700);
 	by = randomPointLoc(700, 1200);
 
-	log("sliding (" + bx + "," + by + "), (" + tx + "," + ty + ")")
-	log("X: " + Math.abs(bx - tx) + " Y: " + Math.abs(by - ty));
 	slidingTime = randomRangeTime(0.2, 0.6);
 	sml_move(bx, by, tx, ty, slidingTime);
 }
 
-/**
- * 随机位置点
- * @param {起始值} start
- * @param {结束值} end
- * @returns
- */
 function randomPointLoc(start, end) {
 	len = end - start;
 	loc = Math.floor(Math.random() * len) + start;
 	return loc;
 }
-
-/**
- * 从几秒到几秒
- * @param {开始秒} start
- * @param {结束秒} end
- * @returns
- */
 function randomRangeTime(start, end) {
 	len = (end - start) * 1000;
 	ms = Math.floor(Math.random() * len) + start * 1000;
 	return ms;
 }
 
-/**
- * 秒转毫秒
- * @param {秒} sec
- * @returns
- */
 function secToMs(sec) {
 	return sec * 1000;
 }
@@ -127,20 +88,14 @@ function sml_move(qx, qy, zx, zy, time) {
 		"y": zy
 	};
 	for (var i = 0; i < 4; i++) {
-
 		eval("point.push(dx" + i + ")");
-
-	};
-	// log(point[3].x)
+	}
 
 	for (let i = 0; i < 1; i += 0.08) {
 		xxyy = [parseInt(bezier_curves(point, i).x), parseInt(bezier_curves(point, i).y)]
-
 		xxy.push(xxyy);
-
 	}
 
-	// log(xxy);
 	gesture.apply(null, xxy);
 }
 
@@ -163,6 +118,19 @@ function bezier_curves(cp, t) {
 	return result;
 }
 
-var appName = "bilibili";
+
+// 逻辑代码
+function readPage(count) {
+	for (let i = 0; i < count; ++i) {
+		slidingDownByCurve();
+		sleep(2000);
+		// if (i % 5 == 0) {
+		// 	click(200, 500);
+		// }
+	}
+}
+
+var appName = "中青看点";
 launchApp(appName);
 sleep(5000);
+readPage(1000);
