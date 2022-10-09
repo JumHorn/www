@@ -17,7 +17,7 @@ function findAndClick(str) {
 /**
  * 从上往下滑动，曲线滑动
  */
-function slidingDownByLine() {
+function slidingDownByCurve() {
 	// top X,Y范围
 	bx = randomPointLoc(500, 600);
 	by = randomPointLoc(300, 400);
