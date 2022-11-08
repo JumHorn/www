@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title> vip video </title>
+	<script type="text/javascript">
+
+		function onClear() {
+			document.getElementById("vipurl").value = "";
+		}
+
+		function onPlay() {
+			var vipurl = document.getElementById("vipurl").value;
+			if (vipurl == "") {
+				alert("请输入视频链接");
+			} else {
+				var selectedStream = document.getElementById("stream");
+				var streamurl = selectedStream.options[selectedStream.selectedIndex].value;
+				var play = document.getElementById("play");
+				play.src = streamurl + vipurl;
+			}
+		}
+	</script>
+
+	<!--<link rel="stylesheet" href="*/*.css"> -->
+	<style>
+		body {
+			margin: 0;
+			/* Reset default margin */
+		}
+
+		iframe {
+			display: block;
+			/* iframes are inline by default */
+			background: #000;
+			border: none;
+			/* Reset default border */
+			height: 100vh;
+			/* Viewport-relative units */
+			width: 100vw;
+		}
+	</style>
+</head>
+
+<body>
+	<table>
+		<tr>
+			<td height="50">
+				<form method="post" action="">
+					<select id="stream">
+						<option value="https://okjx.cc/?url=" selected>线路1</option>
+						<option value="https://jx.bozrc.com:4433/player/?url=">线路2</option>
+						<option value="https://api.jiexi.la/?url=">线路3</option>
+					</select>
+					<input type="text" id="vipurl" value="">
+					<input type="button" value="播放" onclick="onPlay()">
+					<input type="button" value="清除" onclick="onClear()">
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td><iframe src="" id="play" allowfullscreen="true"></iframe></td>
+		</tr>
+	</table>
+</body>
+
+</html>
