@@ -44,25 +44,17 @@
 </head>
 
 <body>
-	<table>
-		<tr>
-			<td height="50">
-				<form method="post" action="">
-					<select id="stream">
-						<option value="https://okjx.cc/?url=" selected>线路1</option>
-						<option value="https://jx.bozrc.com:4433/player/?url=">线路2</option>
-						<option value="https://api.jiexi.la/?url=">线路3</option>
-					</select>
-					<input type="text" id="vipurl" value="">
-					<input type="button" value="播放" onclick="onPlay()">
-					<input type="button" value="清除" onclick="onClear()">
-				</form>
-			</td>
-		</tr>
-		<tr>
-			<td><iframe src="" id="play" allowfullscreen="true"></iframe></td>
-		</tr>
-	</table>
+	<form method="post" action="">
+		<select id="stream">
+			<option value="https://okjx.cc/?url=" selected>线路1</option>
+			<option value="https://jx.bozrc.com:4433/player/?url=">线路2</option>
+			<option value="https://api.jiexi.la/?url=">线路3</option>
+		</select>
+		<input type="text" id="vipurl" value="">
+		<input type="button" value="播放" onclick="onPlay()">
+		<input type="button" value="清除" onclick="onClear()">
+	</form>
+	<iframe src="" id="play" allowfullscreen="true"></iframe>
 </body>
 
 </html>
