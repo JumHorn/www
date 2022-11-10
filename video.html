@@ -1,16 +1,19 @@
 <html>
 <title>JumHorn</title>
 
-<script>
-	var video = document.getElementById('video');
-	console.log(video.height);
-</script>
 
 <body>
 
-	<video id='video' src='file.mp4' width='800' height='600'></video>
+	<video id='video' src='dance.mp4' name="media" width='800' height='600'></video>
 	<br />
 	<button onclick='video.paused ? video.play() : video.pause()'>Play/Pause</button>
+
+	<!-- script 放在body后面，防止视频没有加载出来，var video是null -->
+	<script>
+		var video = document.getElementById('video');
+		console.log(video.height);
+	</script>
+
 </body>
 
 </html>
