@@ -1,0 +1,16 @@
+<html>
+<title>JumHorn</title>
+
+<script>
+	var video = document.getElementById('video');
+	console.log(video.height);
+</script>
+
+<body>
+
+	<video id='video' src='file.mp4' width='800' height='600'></video>
+	<br />
+	<button onclick='video.paused ? video.play() : video.pause()'>Play/Pause</button>
+</body>
+
+</html>
