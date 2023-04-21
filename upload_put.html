@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div>
+    Select file to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <button id="uploadButton" onclick="uploadFile()">upload file</button>
+</div>
+<script>
+function uploadFile() {
+  const fileInput = document.getElementById('fileToUpload');
+  const file = fileInput.files[0];
+  // 构建请求URL
+  var url = '/upload/' + file.name;
+
+  // 创建FormData对象，将文件添加到其中
+  var formData = new FormData();
+  formData.append('file', file);
+
+  // 构建fetch请求对象，使用PUT方法上传文件
+  var request = new Request(url, {
+    method: 'PUT',
+    body: file,
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    }
+  });
+
+  // 发送fetch请求
+  fetch(request)
+    .then(function(response) {
+      if (response.ok) {
+        console.log('File uploaded successfully!');
+      } else {
+        console.error('Upload error: ' + response.status);
+      }
+    })
+    .catch(function(error) {
+      console.error('Fetch error: ' + error);
+    });
+}
+</script>
+</body>
+</html>
