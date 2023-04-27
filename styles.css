@@ -1,0 +1,85 @@
+body {
+  background-color: #333;
+  color: #fff;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.nav1 {
+  margin-bottom: 20px;
+}
+
+.nav1 button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2ecc71;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav2 button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f1c40f;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e67e22;
+}
+
+footer {
+  position: absolute;
+  /* 将页脚定位在页面底部 */
+  bottom: 0;
+  /* 将页脚置于页面底部 */
+  width: 100%;
+  /* 设置页脚宽度为100% */
+  height: 50px;
+  /* 设置页脚高度 */
+  display: flex;
+  /* 使用弹性盒子布局 */
+  justify-content: center;
+  /* 将页脚内容居中对齐 */
+  align-items: center;
+  /* 将页脚内容垂直居中对齐 */
+  font-size: 14px;
+  /* 设置页脚文字大小 */
+  color: #666;
+  /* 设置页脚文字颜色 */
+}
