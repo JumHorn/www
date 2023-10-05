@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf8" />
+	<title>我的评论页面</title>
+</head>
+
+<body>
+	<h1>欢迎来到我的评论页面</h1>
+	<!-- 让表单跳转到该不可见iframe上 -->
+	<iframe name="hidden_iframe" style="display:none;"></iframe>
+	<!-- 表单用于上传评论 -->
+	<form action="/api/discuss" method="POST" target="hidden_iframe">
+		<label for="comment">发表评论：</label><br>
+		<textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+		<label for="name">您的名字：</label>
+		<input type="text" id="name" name="name" required /><br>
+		<input type="submit" id="comment-btn" value="提交评论" />
+	</form>
+
+	<!-- 显示所有已上传评论 -->
+	<h2>所有评论：</h2>
+	<ul id='comment_list'>
+	</ul>
+
+	<script>
+		// 保存
+		document.querySelector('#comment-btn').addEventListener('click', function () {
+			const ul = document.querySelector('#comment_list');
+			const li = document.createElement("li");
+			const name = document.querySelector('#name').value;
+			const comment = document.querySelector('#comment').value;
+			li.textContent = name + ": " + comment;
+			ul.appendChild(li);
+		});
+
+		async function getComment() {
+			const response = await fetch('https://jumhorn.com/api/discuss');
+			const comment_data = await response.json();
+			const ul = document.querySelector('#comment_list');
+			for (const key in comment_data) {
+				const li = document.createElement("li");
+				const name = key;
+				const comment = comment_data[key];
+				li.textContent = name + ": " + comment;
+				ul.appendChild(li);
+			}
+		}
+
+		window.onload = getComment();
+	</script>
+</body>
+
+</html>
