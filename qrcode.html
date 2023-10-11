@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>二维码生成器</title>
+	<style>
+		.container,
+		.input-group,
+		.qrcode-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			margin: 10px;
+		}
+
+		#url,
+		#qrcode,
+		#generate {
+			justify-content: center;
+			width: 100%;
+			margin: 10px;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="input-group">
+			<input type="text" id="url" placeholder="请输入链接">
+			<button type="button" id="generate">生成二维码</button>
+		</div>
+		<div class="qrcode-container">
+			<div id="qrcode"></div>
+		</div>
+	</div>
+	<script>
+		// 初始化二维码图片
+		const qrcode = new QRCode("qrcode", {
+			text: "https://jumhorn.com",
+			width: 400,
+			height: 400
+		});
+
+		// 监听输入框改变事件
+		const urlInput = document.getElementById("url");
+		urlInput.addEventListener("input", () => {
+			// 获取输入的链接
+			const url = urlInput.value;
+
+			// 生成二维码图片
+			qrcode.makeCode(url);
+		});
+
+		// 点击生成按钮事件
+		const generateButton = document.getElementById("generate");
+		generateButton.addEventListener("click", () => {
+			// 获取输入的链接
+			const url = urlInput.value;
+
+			// 生成二维码图片
+			qrcode.makeCode(url);
+		});
+	</script>
+</body>
+
+</html>
