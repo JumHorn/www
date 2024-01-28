@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>IP Information</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			margin: 20px;
+		}
+
+		#ip-info {
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>IP Information</h1>
+	<div id="ip-info">
+		<p>Loading...</p>
+	</div>
+
+	<script>
+		// Function to fetch IP information and update the HTML
+		async function getIPInformation() {
+			try {
+				const response = await fetch('/api/ip');
+				const data = await response.json();
+
+				// Extract relevant information
+				const ipAddress = data.query;
+				const city = data.city;
+				const region = data.region;
+				const country = data.country;
+
+				// Update the HTML
+				document.getElementById('ip-info').innerHTML = `
+					<p><strong>IP Address:</strong> ${ipAddress}</p>
+					<p><strong>City:</strong> ${city}</p>
+					<p><strong>Region:</strong> ${region}</p>
+					<p><strong>Country:</strong> ${country}</p>
+					`;
+			} catch (error) {
+				console.error('Error fetching IP information:', error);
+				document.getElementById('ip-info').innerHTML = '<p>Failed to fetch IP information.</p>';
+			}
+		}
+
+		// Call the function when the page loads
+		window.onload = getIPInformation;
+	</script>
+</body>
+
+</html>
