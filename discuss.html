@@ -36,7 +36,7 @@
 		});
 
 		async function getComment() {
-			const response = await fetch('https://jumhorn.com/api/discuss');
+			const response = await fetch('/api/discuss');
 			const comment_data = await response.json();
 			const ul = document.querySelector('#comment_list');
 			for (const key in comment_data) {
