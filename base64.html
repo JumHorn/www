@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Base64 Encoder/Decoder</h1>
+
+    <label for="inputText">Enter text:</label>
+    <textarea id="inputText" placeholder="Type or paste your text here..."></textarea>
+
+    <button onclick="encodeText()">Encode</button>
+    <button onclick="decodeText()">Decode</button>
+
+    <textarea id="outputText" readonly></textarea>
+
+    <script>
+        function encodeText() {
+            const inputText = document.getElementById('inputText').value;
+            const encodedText = btoa(inputText);
+            document.getElementById('outputText').value = encodedText;
+        }
+
+        function decodeText() {
+            const inputText = document.getElementById('inputText').value;
+            try {
+                const decodedText = atob(inputText);
+                document.getElementById('outputText').value = decodedText;
+            } catch (error) {
+                document.getElementById('outputText').value = 'Invalid Base64 string';
+            }
+        }
+    </script>
+</body>
+</html>
