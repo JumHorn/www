@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Content-type: application/json"
+echo ""
+curl http://ip-api.com/json/$REMOTE_ADDR
