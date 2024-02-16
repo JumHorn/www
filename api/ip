@@ -2,4 +2,4 @@
 
 echo "Content-type: application/json"
 echo ""
-curl http://ip-api.com/json/$REMOTE_ADDR
+curl http://ip-api.com/json/$HTTP_X_REAL_IP
