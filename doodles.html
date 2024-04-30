@@ -2,15 +2,28 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>可编辑的单页网站</title>
+	<title>editable page</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+		}
+
+		textarea {
+			width: 100%;
+			height: 80px;
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 
 <body>
-	<div contenteditable="true" id="editable-div">
+	<div id="editable-div">
 		<p>在这里输入文本，可以编辑并添加图片</p>
 		<p>为什么两个图片是一排的</p>
 		<p>又是一段文字</p>
 	</div>
+	<textarea id="contentInput" placeholder="输入文本或HTML标签..."></textarea>
 	<button id="add-image-btn">添加图片</button>
 	<button id="add-text-btn">添加文本</button>
 	<button id="save-btn">保存</button>
@@ -41,11 +54,11 @@
 			reader.readAsDataURL(file);
 		});
 
-		// 添加文本
+		// 添加文本或者html标签
 		document.querySelector('#add-text-btn').addEventListener('click', function () {
-			var p = document.createElement('p');
-			p.textContent = '这是一个新段落';
-			document.querySelector('#editable-div').appendChild(p);
+			var contentInput = document.getElementById("contentInput");
+			document.querySelector('#editable-div').innerHTML += contentInput.value;
+			contentInput.value = "";
 		});
 
 		// 保存
