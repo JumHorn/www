@@ -17,6 +17,7 @@
 
 		#url,
 		#qrcode,
+		#qrcodeCamera,
 		#generate {
 			justify-content: center;
 			width: 100%;
@@ -24,6 +25,7 @@
 		}
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+	<script src="https://unpkg.com/html5-qrcode"></script>
 	<script type="text/javascript" src="https://unpkg.com/@zxing/browser@latest"></script>
 
 </head>
@@ -36,6 +38,7 @@
 		</div>
 		<div class="qrcode-container">
 			<div id="qrcode"></div>
+			<div id="qrcodeCamera"></div>
 		</div>
 	</div>
 	<br />
@@ -95,6 +98,34 @@
 			const result = await decoder.decodeFromImageElement(qrcodeImage);
 			qrcodeResult.innerText = result.text;
 		}
+
+		// 调用摄像头扫描二维码
+		function domReady(fn) {
+			if (
+				document.readyState === "complete" ||
+				document.readyState === "interactive"
+			) {
+				setTimeout(fn, 1000);
+			} else {
+				document.addEventListener("DOMContentLoaded", fn);
+			}
+		}
+
+		domReady(function () {
+
+			// If found you qr code
+			function onScanSuccess(decodeText, decodeResult) {
+				const qrcodeResult = document.getElementById('qrcodeResult');
+				qrcodeResult.innerText = decodeText;
+				// alert("You Qr is : " + decodeText, decodeResult);
+			}
+
+			let htmlscanner = new Html5QrcodeScanner(
+				"qrcodeCamera",
+				{ fps: 10, qrbos: 250 }
+			);
+			htmlscanner.render(onScanSuccess);
+		});
 	</script>
 </body>
 
