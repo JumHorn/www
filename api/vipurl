@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+
+import os
+import cgi
+import redis
+import json
+
+
+def main():
+    # 获取请求方法
+    request_method = os.environ.get('REQUEST_METHOD')
+    host = os.environ.get('secret_redis_host')
+    port = os.environ.get('secret_redis_port')
+    password = os.environ.get('secret_redis_password')
+    r = redis.Redis(host=host, port=port, db=0, password=password)
+    resp = "Content-type: application/json\r\n\r\n"
+    # 判断请求方法
+    if request_method == 'GET':  # return all the comment
+        urls = r.zrevrange('vipurl', 0, -1)
+        decoded_urls = [url.decode('utf-8') for url in urls]
+        resp = resp + json.dumps(decoded_urls)
+    else:
+        resp = resp + 'server error: unknow request method'
+    r.close()  # 关闭数据库连接
+    print(resp)
+
+
+if __name__ == '__main__':
+    main()
