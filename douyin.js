@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         douyin live auto comment
-// @namespace    http://douyin.com/
+// @namespace    https://douyin.com/
 // @version      2025-10-19
-// @description  coming to douyin live without comment!
-// @author       You
+// @description  douyin live auto comment
+// @author       JumHorn
 // @match        https://live.douyin.com/*
 // @icon         https://jumhorn.com/favicon.ico
 // @grant        none
@@ -14,7 +14,7 @@
 
 	// Your code here...
 	setTimeout(closeComment, 3000);
-	addButton();
+	createUI();
 })();
 
 // async sleep
@@ -30,15 +30,43 @@ async function sendComment() {
 	}
 	await sleep(1000);
 	// click at (1290,600)相对于页面位置，不通用
-	simulateClick(1290, 660);
+	simulateClick(1290, 686);
 }
 
-function addButton() {
+function createUI() {
+	// 创建一个容器 div
+	const container = document.createElement('div');
+	Object.assign(container.style, {
+		position: 'fixed',
+		top: '10px',
+		right: '10px',
+		zIndex: 99999,
+		display: 'flex',
+		alignItems: 'center',
+		gap: '8px', // 输入框和按钮之间的间距
+		backgroundColor: 'white',
+		padding: '8px 10px',
+		borderRadius: '10px',
+		boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+	});
+
+	// 创建输入框
+	const input = document.createElement('input');
+	Object.assign(input.style, {
+		width: '80px',
+		padding: '6px 8px',
+		border: '1px solid #ccc',
+		borderRadius: '6px',
+		outline: 'none',
+		fontSize: '14px'
+	});
+	input.type = 'number'; // 只允许输入数字
+	input.textContent = '5';
+
 	// 创建按钮
 	const btn = document.createElement('button');
 	btn.textContent = '开始';
 	Object.assign(btn.style, {
-		position: 'fixed',
 		top: '20px',
 		right: '20px',
 		zIndex: 99999,
@@ -52,7 +80,10 @@ function addButton() {
 		fontSize: '14px'
 	});
 
-	document.body.appendChild(btn);
+	// 将输入框和按钮加入容器
+	container.appendChild(input);
+	container.appendChild(btn);
+	document.body.appendChild(container);
 
 	// 控制状态
 	let running = false;
@@ -62,7 +93,13 @@ function addButton() {
 		if (running) {
 			btn.textContent = '停止';
 			btn.style.backgroundColor = '#E74C3C';
-			startTask();
+			// 读取间隔时间
+			const valStr = input.value.trim();
+			let val = Number(valStr);
+			if (valStr === '' || isNaN(val) || val < 5) {
+				val = 5;
+			}
+			startTask(val);
 		} else {
 			btn.textContent = '开始';
 			btn.style.backgroundColor = '#409EFF';
@@ -70,12 +107,12 @@ function addButton() {
 		}
 	});
 
-	async function startTask() {
+	async function startTask(val) {
 		console.log('任务开始');
 		// 执行重复发送评论
 		for (let i = 0; i < 100 && running; i++) {
 			sendComment();
-			await sleep(5000);
+			await sleep(val * 1000);
 		}
 	}
 
@@ -137,7 +174,6 @@ function simulateClick(x, y) {
 		cancelable: true,// Event can be canceled
 		clientX: x,// The x-coordinate
 		clientY: y// The y-coordinate
-		// You can also add other properties like screenX, screenY, ctrlKey, etc.
 	});
 
 	// 4. Dispatch the event on the target element
