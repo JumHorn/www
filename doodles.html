@@ -57,7 +57,7 @@
 		// 添加文本或者html标签
 		document.querySelector('#add-text-btn').addEventListener('click', function () {
 			var contentInput = document.getElementById("contentInput");
-			document.querySelector('#editable-div').innerHTML += contentInput.value;
+			document.querySelector('#editable-div').innerHTML += contentInput.value + '<br>';
 			contentInput.value = "";
 		});
 
